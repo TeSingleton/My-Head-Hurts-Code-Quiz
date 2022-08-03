@@ -209,11 +209,13 @@ let results = document.getElementById("results");
 
 // todo add functionality to display the questions and print js
 
-const  displayQuestion= function () {
-  displayQuestion.textContent = questionsObj[presentQuestion].hiphopQuestion;
+const displayQuestion = function () {
+  questions.textContent = questionsObj[presentQuestion].hiphopQuestion;
 
-  for ()
-
+  for (i = 0; i < questionsObj[presentQuestion].hiphopQuestion.length; i++)
+    var choices = document.createElement("button");
+  choices.innerHTML = questionsObj[presentQuestion].hiphopAnswer[i];
+  options.appendChild(choices);
 };
 
 //* Love YOUR Life, and Love Yourself while you live it...
