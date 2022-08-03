@@ -1,79 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="./Assets/css/style.css">
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./Resources/css/style.css" />
 
-    <!-- 1quiz start -->
-    <div class="start-btn"><button>Start</button></div>
-    
-    <!-- 2info box -->
-    <!-- The use of span--span is an inline element equivalent to a div used to group elements for styling purposes  -->
-    <div class="info-box">
-        <div class="info-title"><span>Quiz Rules</span></div>
-        <div class="info-list">
-            <div class="info">#1.You will have only<span> 15 seconds</span> for each question.</div>
-            <div class="info">#2.Once an answer is selected,it cant be changed</div>
-            <div class="info">#3.You cant select any option once timer goes off.</div>
-            <div class="info">#4.You cant exit from the Quiz while you're playing.</div>
-            <div class="info">#5. You'll get points for correct answers.</div>
-         </div>
-         <div class="buttons">
-            <button class="quit">Exit Quiz</button>
-            <button class="restart">Continue</button>
-         </div>   
-    </div>
-    <!-- 3quiz box -->
-    <div class="quiz-box">
-        <header>
-            <div class="title">Awesome Quiz Application</div>
-            <div class="timer">
-                <div class="timer-left-txt">Time Left</div>
-                <div class="timer-sec">15</div>
-                </div><div class="time-line"></div>
-            </header>
-            <section>
-                <div class="que-text">
-                    <!-- this area has question entered form js -->
-                </div>
-                <div class="option-list">
-                    <!-- this area has question entered form js -->
-                </div>
-            </section>
-            <!-- quiz footer -->
-            <footer>
-                <div class="total-que">
-                    <!-- question count from js -->
-                </div>
-                <button class="next-btn">Next Que</button>
-            </footer>
-            </div>
-            <!-- 4results box -->
-    <div class="results-box">
-         <div class="icon">
-            <!-- explain i and what this class does -->
-            <i class="fas fa-crown"></i>
-         </div>
-         <div class="complete-text">You've completed the Quiz!</div>
-         <div class="score-text">
-         <!-- The score results will be placed here from javascript -->
-        </div>
-        <div class="buttons">
-            <button class="restart">Retry</button>
-            <button class="quit">Quit Quiz</button>
-        </div>
-    </div>
-   
-        </div>
-         <!-- Inside this JS file we will insert Questions and options only -->
-   
-        <script></script>
-        <!-- inside this js file we have coded the quiz codes -->
-        <script></script>
-</body>
+    <title>Hows Your Hip Hop?</title>
+  </head>
+  <body class="addquiz">
+    <!-- todo add template for questions and page structure  -->
+
+    <section class="hello">
+      <h1>How Well do you kow your Hip Hop?</h1>
+      <button>Start</button>
+      <p id="timer">Timer</p>
+      <p id="questions"></p>
+      <p id="answers"></p>
+      <p id="results"></p>
+      <p id=""></p>
+    </section>
+
+
+    <!-- this section will show at the end of quiz -->
+    <!-- <section>
+      <h2>Thanks for playing</h2>
+      <br />
+      <p>Add your name to the scoreboard!</p>
+      <form action="" id="scorecard">
+        <p>Your score is <span id="endscore"></span></p>
+        <input type="text" id="yourname" /><input type="text" id="addscore" />
+      </form>
+    </section> -->
+
+    <footer class="nav">
+      <!-- highscors will be linked in footer -->
+      <nav><a href="">High Scores</a></nav>
+    </footer>
+
+    <script src="./Resources/js/index.js"></script>
+    <script src="./Resources/js/questions.js"></script>
+  </body>
 </html>
