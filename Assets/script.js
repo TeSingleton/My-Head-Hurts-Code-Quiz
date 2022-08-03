@@ -13,16 +13,6 @@ var enterScore = document.querySelector("#scorecard");
 
 // var countDown = new Date("Jul 30, 2022 22:34:30").getTime()
 
-// this area creates the html for the quiz
-
-// document.body.onload = loadQuiz;
-
-// function loadQuiz() {
-//   const quizDiv = document.createElement("div");
-
-//   const quizContent = document.create;
-// }
-
 // questions below
 // each question has four options.
 // each question will be built as an object to pull from
@@ -155,7 +145,7 @@ console.log(questionsObj);
 
 // I need a timer
 // the timer needs to count down
-// the count down starts at 90 -0
+// the count down starts at 120 -0
 
 //  i need to show time on the quiz.
 
@@ -168,6 +158,7 @@ var counterOnPage = 120; //value = int
 var timeLeft; // undefined to be assigned a value later
 var correctAnswer = questionsObj.hiphopQuestion;
 
+// starts quiz and timer
 const startButton = function () {
   //naming the function
   // this sets the interval
@@ -202,7 +193,7 @@ const endGame = function () {
 
 // ------------------------------------------------//
 let presentQuestion = 0;
-let picked = "";
+let selection = "";
 let options = document.getElementById("answers");
 let questions = document.getElementById("questions");
 let results = document.getElementById("results");
@@ -216,7 +207,32 @@ const displayQuestion = function () {
     var choices = document.createElement("button");
   choices.innerHTML = questionsObj[presentQuestion].hiphopAnswer[i];
   options.appendChild(choices);
+
+  choices.addEventListener("click", function () {
+    selection = this.textContent;
+
+    if (selection === questionsObj[presentQuestion].rightAnswer) {
+      results.textContent = "Word!";
+      results.className = "yes-word";
+      nextQuestion(); // add Class name and CSS styling
+    } else {
+      results.textContent = "Naaahh Fam!";
+      results.className = "nah-wrong";
+      nextQuestion();
+    }
+  });
 };
+// ---------------------------------------------------------------------------------
+const nextQuestion = function () {
+  questions++;
+  if (questions < questionsObj && counterOnPage > 0) {
+    displayQuestion();
+  } else if (question > questionsObj.length) {
+    stopGame();
+  }
+};
+
+const stopGame = function () {};
 
 //* Love YOUR Life, and Love Yourself while you live it...
 
