@@ -204,35 +204,36 @@ let results = document.getElementById("results");
 // todo add functionality to display the questions and print js
 
 const displayQuestion = function () {
+  // adds questions to page
   questions.textContent = questionsObj[presentQuestion].hiphopQuestion;
-
-  for (i = 0; i < questionsObj[presentQuestion].hiphopQuestion.length; i++)  
+  //
+  for (i = 0; i < questionsObj[presentQuestion].hiphopAnswer.length; i++) {
     var choices = document.createElement("button");
-    
-  choices.innerHTML = questionsObj[presentQuestion].hiphopAnswer[i];
-  options.appendChild(choices);
 
-  
-  choices.addEventListener('click', function () {
-    selection = this.textContent;
+    choices.innerHTML = questionsObj[presentQuestion].hiphopAnswer[i];
+    options.appendChild(choices);
 
-    if (selection === questionsObj[presentQuestion].rightAnswer) {
-      results.textContent = "Word!";
-      results.className = "yes-word";
-      nextQuestion(); // add Class name and CSS styling
-    } else {
-      results.textContent = "Naaahh Fam!";
-      results.className = "nah-wrong";
-      nextQuestion();
-    }
-  });
+    choices.addEventListener("click", function () {
+      selection = this.textContent;
+
+      if (selection === questionsObj[presentQuestion].rightAnswer) {
+        results.textContent = "Word!";
+        results.className = "yes-word";
+        nextQuestion(); // add Class name and CSS styling
+      } else {
+        results.textContent = "Naaahh Fam!";
+        results.className = "nah-wrong";
+        nextQuestion();
+      }
+    });
+  }
 };
 // ---------------------------------------------------------------------------------
 const nextQuestion = function () {
   questions++;
-  if (questions < questionsObj.length-1 && counterOnPage < 0) {
+  if (questions < questionsObj.length - 1 && counterOnPage < 0) {
     displayQuestion();
-  } else if (questions > questionsObj.length-1) {
+  } else if (questions > questionsObj.length - 1) {
     stopGame();
   }
 };
@@ -250,15 +251,14 @@ const stopGame = function (endGame) {
 // -------------------------------------------------------------------
 
 // const gameStart = function () {
- 
+
 // };
 
-var startGame = document.getElementById('start_game_button');
+var startGame = document.getElementById("start_game_button");
 // DOMeL.addEventListener('event',functionName [,boolean]);
-startGame.addEventListener('click', function() {
-   startButton();
-   displayQuestion();
-  
+startGame.addEventListener("click", function () {
+  startButton();
+  displayQuestion();
 });
 
 // gameStart();
