@@ -134,7 +134,7 @@ const questionsObj = [
     rightAnswer: "Damien Lillard(Dame Dolla)",
   },
 ];
-console.log(questionsObj);
+console.log(questionsObj.length);
 // this section will create the timer and append it tho the page when the quiz starts.
 //    timer requires a conditional for correct and incorrect answers
 
@@ -161,7 +161,7 @@ var correctAnswer = questionsObj.hiphopQuestion;
 // starts quiz and timer
 const startButton = function () {
   //naming the function
-  // this sets the interval
+  // this sets the interval--seconds counting
   regression = setInterval(function () {
     counterOnPage--;
     timer.textContent = counterOnPage;
@@ -170,19 +170,22 @@ const startButton = function () {
       clearInterval(regression);
       alert("Times Up");
       location.reload();
-    } else if (correctAnswer == true) {
+    } else if (correctAnswer === true) {
       counterOnPage + 3;
       console.log("Dope!");
+    } else if (correctAnswer === false) {
+      counterOnPage - 10;
+      console.log("aww man");
     }
   }, 1000);
 };
 
-// startButton();  //uncomment this function when ready to deploy
+// startButton(); //uncomment this function when ready to deploy
 
 console.log(startButton);
 
 // ------------------------------------------------//
-//* Its amazing what we are able to do
+//* Its amazing what we are able to do.
 //* Recognize that You are Dope!
 
 // stop timer function
@@ -203,12 +206,14 @@ let results = document.getElementById("results");
 const displayQuestion = function () {
   questions.textContent = questionsObj[presentQuestion].hiphopQuestion;
 
-  for (i = 0; i < questionsObj[presentQuestion].hiphopQuestion.length; i++)
+  for (i = 0; i < questionsObj[presentQuestion].hiphopQuestion.length; i++)  
     var choices = document.createElement("button");
+    
   choices.innerHTML = questionsObj[presentQuestion].hiphopAnswer[i];
   options.appendChild(choices);
 
-  choices.addEventListener("click", function () {
+  
+  choices.addEventListener('click', function () {
     selection = this.textContent;
 
     if (selection === questionsObj[presentQuestion].rightAnswer) {
@@ -225,14 +230,38 @@ const displayQuestion = function () {
 // ---------------------------------------------------------------------------------
 const nextQuestion = function () {
   questions++;
-  if (questions < questionsObj && counterOnPage > 0) {
+  if (questions < questionsObj.length-1 && counterOnPage < 0) {
     displayQuestion();
-  } else if (question > questionsObj.length) {
+  } else if (questions > questionsObj.length-1) {
     stopGame();
   }
 };
 
-const stopGame = function () {};
+const stopGame = function (endGame) {
+  gameOver = document.getElementsByClassName("hello");
+  gameOver.innerHTML = `<div class="final.score">
+   
+   <button class-"button" id= "restart">"One Mo' 'G'in?</button> 
+   </div>
+   <div> 
+   <h2>"One Mo' 'G'in?</h2>`;
+};
+
+// -------------------------------------------------------------------
+
+// const gameStart = function () {
+ 
+// };
+
+var startGame = document.getElementById('start_game_button');
+// DOMeL.addEventListener('event',functionName [,boolean]);
+startGame.addEventListener('click', function() {
+   startButton();
+   displayQuestion();
+  
+});
+
+// gameStart();
 
 //* Love YOUR Life, and Love Yourself while you live it...
 
