@@ -134,6 +134,7 @@ const questionsObj = [
     rightAnswer: "Damien Lillard(Dame Dolla)",
   },
 ];
+
 console.log(questionsObj.length);
 // this section will create the timer and append it tho the page when the quiz starts.
 //    timer requires a conditional for correct and incorrect answers
@@ -156,10 +157,11 @@ var timer = document.querySelector("#timer");
 var regression; // undefined variable to be declared later.
 var counterOnPage = 120; //value = int
 var timeLeft; // undefined to be assigned a value later
-var correctAnswer = questionsObj.hiphopQuestion;
-
+var correctAnswer = questionsObj[0].rightAnswer;
+console.log(correctAnswer);
+// todo get right answer to read in console ✅
 // starts quiz and timer
-const startButton = function () {
+function startButton () {
   //naming the function
   // this sets the interval--seconds counting
   regression = setInterval(function () {
@@ -180,6 +182,7 @@ const startButton = function () {
   }, 1000);
 };
 
+
 // startButton(); //uncomment this function when ready to deploy
 
 console.log(startButton);
@@ -189,38 +192,42 @@ console.log(startButton);
 //* Recognize that You are Dope!
 
 // stop timer function
-const endGame = function () {
+function endGame () {
   clearInterval(regression);
   currentScore = counterOnPage;
 };
 
 // ------------------------------------------------//
-let presentQuestion = 0;
+// let presentQuestion = 0;
 let selection = "";
 let options = document.getElementById("answers");
 let questions = document.getElementById("questions");
 let results = document.getElementById("results");
 
 // todo add functionality to display the questions and print js
+// todo right answer selection may require an event listener.
 
-const displayQuestion = function () {
+function displayQuestion () {
   // adds questions to page
-  questions.textContent = questionsObj[presentQuestion].hiphopQuestion;
-  //
-  for (i = 0; i < questionsObj[presentQuestion].hiphopAnswer.length; i++) {
+  questions.textContent = questionsObj[0].hiphopQuestion;
+  //loops thru questions and adds them to the page
+  for (i = 0; i < questionsObj[0].hiphopAnswer.length; i++) {
     var choices = document.createElement("button");
 
-    choices.innerHTML = questionsObj[presentQuestion].hiphopAnswer[i];
+    choices.innerHTML = questionsObj[0].hiphopAnswer[i];
     options.appendChild(choices);
 
     choices.addEventListener("click", function () {
       selection = this.textContent;
-
-      if (selection === questionsObj[presentQuestion].rightAnswer) {
+      console.log(choices);
+      if (selection === questionsObj[0].rightAnswer) {
+        counterOnPage = counterOnPage + 3;
         results.textContent = "Word!";
         results.className = "yes-word";
+
         nextQuestion(); // add Class name and CSS styling
       } else {
+        counterOnPage = counterOnPage - 10;
         results.textContent = "Naaahh Fam!";
         results.className = "nah-wrong";
         nextQuestion();
@@ -228,17 +235,29 @@ const displayQuestion = function () {
     });
   }
 };
+// 
+
+console.log(nextQuestion);
+
 // ---------------------------------------------------------------------------------
-const nextQuestion = function () {
+// todo make nextQuestion work
+ function nextQuestion  (displayQuestion) {
   questions++;
-  if (questions < questionsObj.length - 1 && counterOnPage < 0) {
-    displayQuestion();
-  } else if (questions > questionsObj.length - 1) {
+  if (questions > questionsObj.length - 1) {
     stopGame();
+  } else if(questions <= questionsObj.length - 1) {
+    questions.innerHTML = "";
+    options.innerHTML = "";
+    nextQuestion()
+    
   }
 };
 
-const stopGame = function (endGame) {
+
+
+console.log(nextQuestion);
+
+function stopGame (endGame) {
   gameOver = document.getElementsByClassName("hello");
   gameOver.innerHTML = `<div class="final.score">
    
@@ -263,6 +282,6 @@ startGame.addEventListener("click", function () {
 
 // gameStart();
 
-//* Love YOUR Life, and Love Yourself while you live it...
+//*Love YOUR Life, and Love Yourself while you live it...
 
 //*Thank you for Reading My Code
