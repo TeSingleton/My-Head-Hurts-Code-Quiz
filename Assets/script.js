@@ -160,28 +160,29 @@ var timeLeft; // undefined to be assigned a value later
 var correctAnswer = questionsObj[0].rightAnswer;
 console.log(correctAnswer);
 // todo get right answer to read in console ✅
+
 // starts quiz and timer
-function startButton () {
+function startButton() {
   //naming the function
   // this sets the interval--seconds counting
   regression = setInterval(function () {
     counterOnPage--;
     timer.textContent = counterOnPage;
 
-    if (counterOnPage < 0) {
-      clearInterval(regression);
-      alert("Times Up");
-      location.reload();
-    } else if (correctAnswer === true) {
-      counterOnPage + 3;
-      console.log("Dope!");
-    } else if (correctAnswer === false) {
-      counterOnPage - 10;
-      console.log("aww man");
-    }
+    // if (counterOnPage < 0) {
+    //   clearInterval(regression);
+    //   alert("Times Up");
+    //   location.reload();
+    // } else if (correctAnswer === true) {
+    //   counterOnPage + 3;
+    //   console.log("Dope!");
+    // } else if (correctAnswer === false) {
+    //   counterOnPage - 10;
+    //   console.log("aww man");
+    // }
   }, 1000);
-};
-
+  return;
+}
 
 // startButton(); //uncomment this function when ready to deploy
 
@@ -192,10 +193,10 @@ console.log(startButton);
 //* Recognize that You are Dope!
 
 // stop timer function
-function endGame () {
+function endGame() {
   clearInterval(regression);
   currentScore = counterOnPage;
-};
+}
 
 // ------------------------------------------------//
 // let presentQuestion = 0;
@@ -207,57 +208,57 @@ let results = document.getElementById("results");
 // todo add functionality to display the questions and print js
 // todo right answer selection may require an event listener.
 
-function displayQuestion () {
+function displayQuestion() {
   // adds questions to page
-  questions.textContent = questionsObj[0].hiphopQuestion;
-  //loops thru questions and adds them to the page
+  questions.innerText = questionsObj[0].hiphopQuestion;
+  //loops thru questions/answers and adds them to the page
   for (i = 0; i < questionsObj[0].hiphopAnswer.length; i++) {
     var choices = document.createElement("button");
 
     choices.innerHTML = questionsObj[0].hiphopAnswer[i];
     options.appendChild(choices);
 
+    // listener for button clicks and stores answers
     choices.addEventListener("click", function () {
       selection = this.textContent;
-      console.log(choices);
+
+      console.log(selection);
+
       if (selection === questionsObj[0].rightAnswer) {
         counterOnPage = counterOnPage + 3;
         results.textContent = "Word!";
-        results.className = "yes-word";
+        // results.className = "yes-word";
 
         nextQuestion(); // add Class name and CSS styling
       } else {
         counterOnPage = counterOnPage - 10;
         results.textContent = "Naaahh Fam!";
-        results.className = "nah-wrong";
+        // results.className = "nah-wrong";
         nextQuestion();
       }
     });
   }
-};
-// 
+}
+// todo---continue from here...this section requires an event listener to move to the next page. as well there may be a need to loop over the questions to get to the next one. 
+//
+function nextQuestion() {
+  questions++;
+  questions.innerText = questionsObj[0].hiphopQuestion;
+  if (questions > questionsObj.length - 1) {
+    stopGame();
+  } else {
+    questions.innerText = "";
+    options.innerText = "";
+    nextQuestion();
+  }
+}
 
 console.log(nextQuestion);
 
 // ---------------------------------------------------------------------------------
 // todo make nextQuestion work
- function nextQuestion  (displayQuestion) {
-  questions++;
-  if (questions > questionsObj.length - 1) {
-    stopGame();
-  } else if(questions <= questionsObj.length - 1) {
-    questions.innerHTML = "";
-    options.innerHTML = "";
-    nextQuestion()
-    
-  }
-};
 
-
-
-console.log(nextQuestion);
-
-function stopGame (endGame) {
+function stopGame() {
   gameOver = document.getElementsByClassName("hello");
   gameOver.innerHTML = `<div class="final.score">
    
@@ -265,7 +266,7 @@ function stopGame (endGame) {
    </div>
    <div> 
    <h2>"One Mo' 'G'in?</h2>`;
-};
+}
 
 // -------------------------------------------------------------------
 
