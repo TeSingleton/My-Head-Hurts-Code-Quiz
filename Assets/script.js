@@ -1,22 +1,95 @@
-// Todo create template literal for the html question pages.
+// let startButton = document.querySelector("#start_game_button");
+// let gameTimer = document.querySelector("timer");
+// let answersButton = document.querySelector("answers");
+// let renderResult = document.querySelector("results");
+//* Don't Dwell on Dreams and forget to live.
+// todo figure out why game duplicates itself after pushing the start button
+function startGame() {
+  //  startGame with a button click{
+  // when clicked these two functions will run
+  showTimer();
+  showQuestion();
+}
 
-// var for bgimage
-// const bodyBackground = document.getElementsByTagName("body")
+var countDown = 120;
+var gameScore;
+var finalScore;
+var pausePlay = false;
+var gameTimer;
 
+function showTimer() {
+  var timer = document.querySelector("#timer");
+  gameTimer = setInterval(function () {
+    countDown--;
+    timer.textContent = countDown;
+    if (countDown <= 0) {
+      clearInterval();
+      stopGame();
+      gameScore = countDown;
+    }
+  }, 1000);
+}
 
+// *"I Love you, I hope you Love you too"÷///
 
-var currentScore;
+var questions = document.getElementById("questions"); //get questions el from HTML
+var selection = "";
+var options = document.getElementById("answers"); // get answers el from HTML
+var resultsEl = document.getElementById("results"); //get results el from HTML
+var currentQuestion = 0;
+//*Love YOUR Life, and Love Yourself while you live it...
 
-var finalScore = document.querySelector("#endscore");
+function showQuestion() {
+  questions.innerText = questionsObj[currentQuestion].hiphopQuestion; //adds questions to the page
 
-var enterScore = document.querySelector("#scorecard");
+  // ==============================================
 
-// var countDown = new Date("Jul 30, 2022 22:34:30").getTime()
+  for (i = 0; i < questionsObj[currentQuestion].hiphopAnswer.length; i++) {
+    // loops thru , adds to page
 
-// questions below
-// each question has four options.
-// each question will be built as an object to pull from
-// each question is built from  random moment in hip hop history-12 questions
+    var choices = document.createElement("button"); // creates button choices
+
+    choices.innerHTML = questionsObj[currentQuestion].hiphopAnswer[i]; // gives choices variable the value of looped obj
+    options.appendChild(choices); // shows looped obj on page
+
+    choices.addEventListener("click", function () {
+      selection = this.textContent;
+      // adds onclick for the answers
+      if (selection === questionsObj[currentQuestion].rightAnswer) {
+        countDown = countDown + 3;
+        resultsEl.innerText = "Word!";
+        nextQuestion();
+      } else {
+        countDown = countDown - 10;
+        results.innerText = "Naahhhh Fam!";
+        nextQuestion();
+      }
+    });
+  }
+}
+
+function nextQuestion() {
+  currentQuestion++;
+  if (currentQuestion > questionsObj.length - 1) {
+    stopGame();
+  } else {
+    questions.innerHTML = "";
+    options.innerHTML = "";
+    showQuestion();
+  }
+}
+
+function stopGame() {
+  clearInterval(gameTimer);
+  if (currentQuestion > questionsObj.length - 1) {
+    timer.innerHTML = "Your Score is  " + countDown;
+    questions.innerHTML = "";
+    options.innerHTML = "";
+    resultsEl.textContent = "Too Bad Pimpin , Try Again";
+    finalScore.textContent = gameTimer.innerText;
+  }
+}
+
 const questionsObj = [
   {
     hiphopQuestion: "How many Chainz does TityBoy currently have?",
@@ -134,155 +207,3 @@ const questionsObj = [
     rightAnswer: "Damien Lillard(Dame Dolla)",
   },
 ];
-
-console.log(questionsObj.length);
-// this section will create the timer and append it tho the page when the quiz starts.
-//    timer requires a conditional for correct and incorrect answers
-
-// initials need to be saved to highscores.js
-
-// variables/class names to append to
-// quiz_box.....Hello.....list.....questions.....div_button.....button
-
-// I need a timer
-// the timer needs to count down
-// the count down starts at 120 -0
-
-//  i need to show time on the quiz.
-
-
-// -----------------------------------------------------------//
-
-var timer = document.querySelector("#timer");
-var regression; // undefined variable to be declared later.
-var counterOnPage = 120; //value = int
-var timeLeft; // undefined to be assigned a value later
-var correctAnswer = questionsObj[0].rightAnswer;
-console.log(correctAnswer);
-// todo get right answer to read in console ✅
-
-// starts quiz and timer
-function startButton() {
-  //naming the function
-  // this sets the interval--seconds counting
-  regression = setInterval(function () {
-    counterOnPage--;
-    timer.textContent = counterOnPage;
-
-    // if (counterOnPage < 0) {
-    //   clearInterval(regression);
-    //   alert("Times Up");
-    //   location.reload();
-    // } else if (correctAnswer === true) {
-    //   counterOnPage + 3;
-    //   console.log("Dope!");
-    // } else if (correctAnswer === false) {
-    //   counterOnPage - 10;
-    //   console.log("aww man");
-    // }
-  }, 1000);
-  return;
-}
-
-// startButton(); //uncomment this function when ready to deploy
-
-console.log(startButton);
-
-// ------------------------------------------------//
-//* Its amazing what we are able to do.
-//* Recognize that You are Dope!
-
-// stop timer function
-function endGame() {
-  clearInterval(regression);
-  currentScore = counterOnPage;
-}
-
-// ------------------------------------------------//
-// let presentQuestion = 0;
-let selection = "";
-let options = document.getElementById("answers");
-let questions = document.getElementById("questions");
-let results = document.getElementById("results");
-
-// todo add functionality to display the questions and print js
-// todo right answer selection may require an event listener.
-
-function displayQuestion() {
-  // adds questions to page
-  questions.innerText = questionsObj[0].hiphopQuestion;
-  //loops thru questions/answers and adds them to the page
-  for (i = 0; i < questionsObj[0].hiphopAnswer.length; i++) {
-    var choices = document.createElement("button");
-
-    choices.innerHTML = questionsObj[0].hiphopAnswer[i];
-    options.appendChild(choices);
-
-    // listener for button clicks and stores answers
-    choices.addEventListener("click", function () {
-      selection = this.textContent;
-
-      console.log(selection);
-
-      if (selection === questionsObj[0].rightAnswer) {
-        counterOnPage = counterOnPage + 3;
-        results.textContent = "Word!";
-        // results.className = "yes-word";
-
-        nextQuestion(); // add Class name and CSS styling
-      } else {
-        counterOnPage = counterOnPage - 10;
-        results.textContent = "Naaahh Fam!";
-        // results.className = "nah-wrong";
-        nextQuestion();
-      }
-    });
-  }
-}
-// todo---continue from here...this section requires an event listener to move to the next page. as well there may be a need to loop over the questions to get to the next one. 
-//
-function nextQuestion() {
-  questions++;
-  questions.innerText = questionsObj[0].hiphopQuestion;
-  if (questions > questionsObj.length - 1) {
-    stopGame();
-  } else {
-    questions.innerText = "";
-    options.innerText = "";
-    nextQuestion();
-  }
-}
-
-console.log(nextQuestion);
-
-// ---------------------------------------------------------------------------------
-// todo make nextQuestion work
-
-function stopGame() {
-  gameOver = document.getElementsByClassName("hello");
-  gameOver.innerHTML = `<div class="final.score">
-   
-   <button class-"button" id= "restart">"One Mo' 'G'in?</button> 
-   </div>
-   <div> 
-   <h2>"One Mo' 'G'in?</h2>`;
-}
-
-// -------------------------------------------------------------------
-
-// const gameStart = function () {
-
-// };
-
-var startGame = document.getElementById("start_game_button");
-// DOMeL.addEventListener('event',functionName [,boolean]);
-startGame.addEventListener("click", function () {
-  startButton();
-  displayQuestion();
-});
-
-// gameStart();
-
-
-
-//*Thank you for Reading My Code
