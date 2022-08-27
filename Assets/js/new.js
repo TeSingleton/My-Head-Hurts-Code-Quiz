@@ -1,10 +1,3 @@
-
-
-
-
-
-
-
 // let startButton = document.querySelector("#start_game_button");
 // let gameTimer = document.querySelector("timer");
 // let answersButton = document.querySelector("answers");
@@ -214,8 +207,3 @@ const questionsObj = [
     rightAnswer: "Damien Lillard(Dame Dolla)",
   },
 ];
-
-//* Its amazing what we are able to do.
-//* Recognize that You are Dope!
-
-//*Thank you for Reading My Code
