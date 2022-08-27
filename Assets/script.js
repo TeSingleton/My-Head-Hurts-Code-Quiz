@@ -3,7 +3,7 @@
 // var for bgimage
 // const bodyBackground = document.getElementsByTagName("body")
 
-//* Don't Dwell on Dreams and forget to live.
+
 
 var currentScore;
 
@@ -150,7 +150,7 @@ console.log(questionsObj.length);
 
 //  i need to show time on the quiz.
 
-// *"I Love you, I hope you Love you too"÷///
+
 // -----------------------------------------------------------//
 
 var timer = document.querySelector("#timer");
@@ -283,6 +283,6 @@ startGame.addEventListener("click", function () {
 
 // gameStart();
 
-//*Love YOUR Life, and Love Yourself while you live it...
+
 
 //*Thank you for Reading My Code

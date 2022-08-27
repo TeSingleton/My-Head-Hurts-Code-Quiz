@@ -2,77 +2,93 @@
 // let gameTimer = document.querySelector("timer");
 // let answersButton = document.querySelector("answers");
 // let renderResult = document.querySelector("results");
-var resultsEl = document.getElementById("#results");
-
+//* Don't Dwell on Dreams and forget to live.
+// todo figure out why game duplicates itself after pushing the start button
 function startGame() {
   //  startGame with a button click{
+  // when clicked these two functions will run
   showTimer();
   showQuestion();
-  console.log("clicked");
 }
 
-// showTimer();
-// showQuestion();
-// console.log("clicked")
-
 var countDown = 120;
+var gameScore;
+var finalScore;
+var pausePlay = false;
+var gameTimer;
 
 function showTimer() {
   var timer = document.querySelector("#timer");
-  setInterval(function () {
+  gameTimer = setInterval(function () {
     countDown--;
     timer.textContent = countDown;
+    if (countDown <= 0) {
+      clearInterval();
+      stopGame();
+      gameScore = countDown;
+    }
   }, 1000);
 }
-var questions = document.getElementById("#questions");
-var choices = document.getElementById("#answers");
-function showQuestions() {
-questions.innerText = questionsObj[0].hiphopQuestion; //adds questions to the page
-  
-  choices.innerText = questionsObj[0].hiphopAnswer;
-  for (let i = 0; i < questionsObj[0].hiphopAnswer.length; i++) {
 
+// *"I Love you, I hope you Love you too"÷///
+
+var questions = document.getElementById("questions"); //get questions el from HTML
+var selection = "";
+var options = document.getElementById("answers"); // get answers el from HTML
+var resultsEl = document.getElementById("results"); //get results el from HTML
+var currentQuestion = 0;
+//*Love YOUR Life, and Love Yourself while you live it...
+
+function showQuestion() {
+  questions.innerText = questionsObj[currentQuestion].hiphopQuestion; //adds questions to the page
+
+  // ==============================================
+
+  for (i = 0; i < questionsObj[currentQuestion].hiphopAnswer.length; i++) {
+    // loops thru , adds to page
+
+    var choices = document.createElement("button"); // creates button choices
+
+    choices.innerHTML = questionsObj[currentQuestion].hiphopAnswer[i]; // gives choices variable the value of looped obj
+    options.appendChild(choices); // shows looped obj on page
+
+    choices.addEventListener("click", function () {
+      selection = this.textContent;
+      // adds onclick for the answers
+      if (selection === questionsObj[currentQuestion].rightAnswer) {
+        countDown = countDown + 3;
+        resultsEl.innerText = "Word!";
+        nextQuestion();
+      } else {
+        countDown = countDown - 10;
+        results.innerText = "Naahhhh Fam!";
+        nextQuestion();
+      }
+    });
   }
 }
 
-// showQuestion and startTimer
+function nextQuestion() {
+  currentQuestion++;
+  if (currentQuestion > questionsObj.length - 1) {
+    stopGame();
+  } else {
+    questions.innerHTML = "";
+    options.innerHTML = "";
+    showQuestion();
+  }
+}
 
-// function showTimer(){
-// //  showTimer
-
-// };
-
-// function showQuestion(){
-// // showQuestion(){
-//     // render question to the page --DOM traversal/add to page
-//         //showAnswers
-//              //rightAnswer,
-//                 //nextQuestion +3 seconds on showTimer
-//             //wrongAnswer,
-//                 //nextQuestion - 10 seconds on showTimer
-//     //}
-// //};
-// }
-
-// function nextQuestion(){
-
-// };
-
-// function gameOver(){
-//stopTimer
-//showHighScore
-// addInitials
-// orderScore
-// };
-
-// // gameOver
-//   // if showTimer reaches 0 || all showQuestions have been answered gameOver/end game
-// // at gameOver showHighScore
-//     // add initials to highScorePage
-
-// function showHighScore(){
-
-// };
+function stopGame() {
+  clearInterval(gameTimer);
+  if (currentQuestion > questionsObj.length - 1) {
+    timer.innerHTML = "Your Score is  " + countDown;
+    questions.innerHTML = "";
+    options.innerHTML = "";
+    resultsEl.textContent = "Too Bad Pimpin , Try Again";
+    finalScore.textContent = gameTimer.innerText;
+  }
+}
 
 const questionsObj = [
   {
