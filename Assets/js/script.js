@@ -30,8 +30,6 @@ function showTimer() {
   }, 1000);
 }
 
-
-
 var questions = document.getElementById("questions"); //get questions el from HTML
 var selection = "";
 var options = document.getElementById("answers"); // get answers el from HTML
@@ -85,23 +83,43 @@ function stopGame() {
     options.innerHTML = "";
     resultsEl.textContent = "Thanks For Playing";
     finalScore.textContent = gameTimer.innerText;
-    localStorage.setItem("timer"); //todo set local storage
+
+    window.localStorage.setItem("gameTimer", gameTimer); //todo set local storage
     highScores();
   }
 }
 
+var gameScore = localStorage.getItem("countDown");
+var yourName = document.getElementById("your_name");
 
+function highScores() {
+  // todo set local storage. onclick event from the  HTML
+  var name = yourName.value.trim();
+  if (name !== "") {
+    var highscore =
+      JSON.parse(window.localStorage.getItem("gameTimer.innerText")) || [];
 
-function highScores() { // todo set local storage. onclick event from the  HTML
-    yourHighScore= JSON.parse(localStorage.getItem("timer",timer));
-    yourHighScore = yourHighScore=textContent; 
+    var playerScore = {
+      score: timer,
+      initials: yourName,
+    };
 
+    highscore.push(playerScore);
+    window.localStorage.setItem("highscore", JSON.stringify(highscore));
+    window.location.href = "highscores.html";
+  }
 
-  
-};
+  // var yourHighScore = document.getElementById("timer");
+  // yourHighScore = yourHighScore.textContent
+  // window.localStorage.setItem("yourHighScore",yourHighScore);
 
+  //   // retrieve item
+  //   document.getElementById("high_score").innerHTML = localStorage.getItem("timer");
+}
 
-
+console.log(localStorage);
+console.log(countDown);
+console.log(timer.textContent);
 const questionsObj = [
   {
     hiphopQuestion: "How many Chainz does TityBoy currently have?",
