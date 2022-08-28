@@ -1,10 +1,3 @@
-
-
-
-
-
-
-
 // let startButton = document.querySelector("#start_game_button");
 // let gameTimer = document.querySelector("timer");
 // let answersButton = document.querySelector("answers");
@@ -37,7 +30,7 @@ function showTimer() {
   }, 1000);
 }
 
-// *"I Love you, I hope you Love you too"÷///
+
 
 var questions = document.getElementById("questions"); //get questions el from HTML
 var selection = "";
@@ -49,12 +42,10 @@ var currentQuestion = 0;
 function showQuestion() {
   questions.innerText = questionsObj[currentQuestion].hiphopQuestion; //adds questions to the page
 
-  // ==============================================
-
   for (i = 0; i < questionsObj[currentQuestion].hiphopAnswer.length; i++) {
     // loops thru , adds to page
 
-    var choices = document.createElement("button"); // creates button choices
+    var choices = document.createElement("button"); // creates button choices from above for loop
 
     choices.innerHTML = questionsObj[currentQuestion].hiphopAnswer[i]; // gives choices variable the value of looped obj
     options.appendChild(choices); // shows looped obj on page
@@ -92,10 +83,24 @@ function stopGame() {
     timer.innerHTML = "Your Score is  " + countDown;
     questions.innerHTML = "";
     options.innerHTML = "";
-    resultsEl.textContent = "Too Bad Pimpin , Try Again";
+    resultsEl.textContent = "Thanks For Playing";
     finalScore.textContent = gameTimer.innerText;
+    localStorage.setItem("timer"); //todo set local storage
+    highScores();
   }
 }
+
+
+
+function highScores() { // todo set local storage. onclick event from the  HTML
+    yourHighScore= JSON.parse(localStorage.getItem("timer",timer));
+    yourHighScore = yourHighScore=textContent; 
+
+
+  
+};
+
+
 
 const questionsObj = [
   {
@@ -216,6 +221,6 @@ const questionsObj = [
 ];
 
 //* Its amazing what we are able to do.
-//* Recognize that You are Dope!
+//* If you're reading this , just recognize that You are Dope!
 
 //*Thank you for Reading My Code

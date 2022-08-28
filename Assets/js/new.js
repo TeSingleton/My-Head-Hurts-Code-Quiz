@@ -1,3 +1,5 @@
+// scratch paper.js  to be removed before deploy
+
 // let startButton = document.querySelector("#start_game_button");
 // let gameTimer = document.querySelector("timer");
 // let answersButton = document.querySelector("answers");
