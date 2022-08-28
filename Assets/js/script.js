@@ -4,9 +4,10 @@
 // let renderResult = document.querySelector("results");
 //* Don't Dwell on Dreams and forget to live.
 // todo figure out why game duplicates itself after pushing the start button
+
+//  startGame with a button click{
+// when clicked these two functions will run
 function startGame() {
-  //  startGame with a button click{
-  // when clicked these two functions will run
   showTimer();
   showQuestion();
 }
@@ -17,6 +18,7 @@ var finalScore;
 var pausePlay = false;
 var gameTimer;
 
+// creates timer  and appeneds it to the page
 function showTimer() {
   var timer = document.querySelector("#timer");
   gameTimer = setInterval(function () {
@@ -37,11 +39,12 @@ var resultsEl = document.getElementById("results"); //get results el from HTML
 var currentQuestion = 0;
 //*Love YOUR Life, and Love Yourself while you live it...
 
+// loops thru the questions and answers and prints them to the page
 function showQuestion() {
   questions.innerText = questionsObj[currentQuestion].hiphopQuestion; //adds questions to the page
 
   for (i = 0; i < questionsObj[currentQuestion].hiphopAnswer.length; i++) {
-    // loops thru , adds to page
+    // loops thru the answers .
 
     var choices = document.createElement("button"); // creates button choices from above for loop
 
@@ -52,13 +55,15 @@ function showQuestion() {
       selection = this.textContent;
       // adds onclick for the answers
       if (selection === questionsObj[currentQuestion].rightAnswer) {
-        countDown = countDown + 3;
-        resultsEl.innerText = "Word!";
+        //if the right answer is selected
+        countDown = countDown + 3; //add 3 seconds to the timer
+        resultsEl.innerText = "Word!"; // inform user of correct selection
         nextQuestion();
       } else {
-        countDown = countDown - 10;
-        results.innerText = "Naahhhh Fam!";
-        nextQuestion();
+        //otherwise-wrong answer selected
+        countDown = countDown - 10; // remove 10 seconds
+        results.innerText = "Naahhhh Fam!"; //inform user of wrong selection
+        nextQuestion(); // run the function for next question
       }
     });
   }
@@ -76,13 +81,15 @@ function nextQuestion() {
 }
 
 function stopGame() {
-  clearInterval(gameTimer);
+  // stop the quiz
+  clearInterval(gameTimer); // clears game timer
   if (currentQuestion > questionsObj.length - 1) {
-    timer.innerHTML = "Your Score is  " + countDown;
-    questions.innerHTML = "";
-    options.innerHTML = "";
-    resultsEl.textContent = "Thanks For Playing";
-    finalScore.textContent = gameTimer.innerText;
+    // if there are no more questioins left
+    timer.innerHTML = "Your Score is  " + countDown; // show the users score
+    questions.innerHTML = ""; // clear this element
+    options.innerHTML = ""; // clear this element
+    resultsEl.textContent = "Thanks For Playing"; //add this string to the results element sayin " thank you for playing"
+    finalScore.textContent = gameTimer.innerText; // the final score should be the amount of time left on the timer.
 
     window.localStorage.setItem("gameTimer", gameTimer); //todo set local storage
     highScores();
@@ -108,19 +115,13 @@ function highScores() {
     window.localStorage.setItem("highscore", JSON.stringify(highscore));
     window.location.href = "highscores.html";
   }
-
-  // var yourHighScore = document.getElementById("timer");
-  // yourHighScore = yourHighScore.textContent
-  // window.localStorage.setItem("yourHighScore",yourHighScore);
-
-  //   // retrieve item
-  //   document.getElementById("high_score").innerHTML = localStorage.getItem("timer");
 }
 
 console.log(localStorage);
 console.log(countDown);
 console.log(timer.textContent);
 const questionsObj = [
+  // questions come from here
   {
     hiphopQuestion: "How many Chainz does TityBoy currently have?",
 
